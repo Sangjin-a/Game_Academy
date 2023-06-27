@@ -20,7 +20,7 @@ public class EnemyObject : MonoBehaviour
 
     private void MoveDown()
     {
-        if (gameObject.transform.position.y > -2)
+        if (gameObject.transform.position.y >= -5)
             gameObject.transform.position += new Vector3(0, -enemy.getSpeed*Time.deltaTime, 0);
     }
     void Start()
@@ -34,9 +34,12 @@ public class EnemyObject : MonoBehaviour
     {
         if (enemy == null)
             return;
-
+     
             MoveDown();
-        
+        if (gameObject.transform.position.y <= -5)
+        {
+            Destroy(gameObject);
+        }
     }
     
 }
