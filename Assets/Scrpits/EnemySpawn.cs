@@ -12,20 +12,29 @@ public class EnemySpawn : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            GameObject obj = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity, this.transform);
-            obj.transform.position = new Vector3(Random.Range(-2, 2), 5 + Random.Range(0, 3), 0);
-            Enemy e = new Enemy(Enemy.EnemeyType.Basic, 100, 10, i + 0.5f);
-
-            EnemyObject enemyObject = obj.GetComponent<EnemyObject>();
-            enemyObject.SetEnmey(e);
-            enemy_OBJ_List.Add(enemyObject);
-            Debug.Log(enemy_OBJ_List.Count);
+          
         }
     }
     void Update()
     {
 
+        CreateEnemy();
 
+    }
 
+    private void CreateEnemy()
+    {
+        if (enemy_OBJ_List.Count < 10)
+        {
+            GameObject obj = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity, this.transform);
+            obj.transform.position = new Vector3(Random.Range(-3, 3), 5 + Random.Range(10, 15), 0);
+            Enemy e = new Enemy(Enemy.EnemeyType.Basic, Random.Range(5,15), 10,Random.Range(1,4));
+
+            EnemyObject enemyObject = obj.GetComponent<EnemyObject>();
+            enemyObject.SetEnmey(e);
+            enemy_OBJ_List.Add(enemyObject);
+            Debug.Log(enemy_OBJ_List.Count);
+
+        }
     }
 }
