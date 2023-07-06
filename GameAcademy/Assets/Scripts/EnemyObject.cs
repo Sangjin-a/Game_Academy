@@ -30,12 +30,14 @@ public class EnemyObject : MonoBehaviour{
 
     private void Update(){
         if (enemy == null) return;
+
+        if (GameCore.Instance.gameStatus != GameCore.GameStatus.Play) Destroy(this.gameObject);
         MoveEnemy();
     }
 
     private void MoveEnemy(){
         if (this.transform.position.y <= -5f){
-            return;
+            Destroy(this.gameObject);
         }
         else
         {
@@ -48,8 +50,20 @@ public class EnemyObject : MonoBehaviour{
 
         if (enemy.Hp - dmg <= 0) Destroy(this.gameObject);
 
-        enemy.Hit(dmg);
+        if (enemy.Hit(dmg) == false){
+            GameCore.Instance.IncreaseScore();
+        }
         this.hpbar.value = enemy.Hp;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision){
+
+        if(collision.gameObject.tag == "Player"){
+            GameCore.Instance.HitDamage();
+
+            Destroy(this.gameObject);
+        }
+        
     }
 
 

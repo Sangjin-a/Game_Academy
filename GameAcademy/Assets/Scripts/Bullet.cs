@@ -17,13 +17,17 @@ public class Bullet : MonoBehaviour{
         Physics2D.IgnoreLayerCollision(7, 6);
     }
 
-    private void Update()
-    {
-        if (gameObject.transform.position.y > 5) { 
-            Destroy(gameObject);
-            Debug.Log("Y가 5보다 커져서 Destroy");
-        }
+
+    void Update(){
+
+        if (GameCore.Instance.gameStatus != GameCore.GameStatus.Play) Destroy(this.gameObject);
+
+        if (this.transform.position.y >= 5f) Destroy(this.gameObject);
+
+
+
     }
+
 
 
     public void OnCollisionEnter2D(Collision2D col){

@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour{
     public GameObject player;
 
 
-    public int step = 0;
+    int step = 0;
 
     void Start(){
         
